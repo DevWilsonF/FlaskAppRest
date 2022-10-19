@@ -2,44 +2,44 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-stores = [{"name": "My Store", "items": [{"name": "Chair", "price": 15.99}]}]
+shops = [{"name": "My Shops", "products": [{"name": "Chair", "price": 15.99}]}]
 
 
-@app.get("/store")
-def get_stores():
-    return {"stores": stores}
+@app.get("/shop")
+def get_shops():
+    return {"shops": shops}
 
 
-@app.post("/store")
-def create_store():
+@app.post("/shop")
+def create_shop():
     request_data = request.get_json()
-    new_store = {"name": request_data["name"], "items": []}
-    stores.append(new_store)
-    return new_store, 201
+    new_shop = {"name": request_data["name"], "products": []}
+    shops.append(new_shop)
+    return new_shop, 201
 
 
-@app.post("/store/<string:name>/item")
+@app.post("/shop/<string:name>/item")
 def create_item(name):
     request_data = request.get_json()
-    for store in stores:
-        if store["name"] == name:
+    for shop in shops:
+        if shop["name"] == name:
             new_item = {"name": request_data["name"], "price": request_data["price"]}
-            store["items"].append(new_item)
+            shop["products"].append(new_item)
             return new_item, 201
-    return {"message": "Store not found"}, 404
+    return {"message": "shop not found"}, 404
 
 
-@app.get("/store/<string:name>")
-def get_store(name):
-    for store in stores:
-        if store["name"] == name:
-            return store
-    return {"message": "Store not found"}, 404
+@app.get("/shop/<string:name>")
+def get_shop(name):
+    for shop in shops:
+        if shop["name"] == name:
+            return shop
+    return {"message": "shop not found"}, 404
 
 
-@app.get("/store/<string:name>/item")
-def get_item_in_store(name):
-    for store in stores:
-        if store["name"] == name:
-            return {"items": store["items"]}
-    return {"message": "Store not found"}, 404
+@app.get("/shop/<string:name>/item")
+def get_item_in_shop(name):
+    for shop in shops:
+        if shop["name"] == name:
+            return {"products": shop["products"]}
+    return {"message": "shop not found"}, 404
