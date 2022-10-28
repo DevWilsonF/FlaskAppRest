@@ -3,7 +3,7 @@ Este repositorio está enfocado para el desarrollo de una api que reciba peticio
 
 # Metodo Get Shop
 Muestra las todas las tiendas almacenadas
-
+<img src="README/getShop.png">
 # Metodo Post Shop
 creacion  de una nueva tienda
 
